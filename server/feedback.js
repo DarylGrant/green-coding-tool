@@ -35,14 +35,16 @@ function analyseCode(code) {
         energyUsed += loops * 0.02; // Energy used by loops
     }
 
-    // 5. Identify unnecessary function calls (e.g., empty function calls)
+    /// 5. Identify unnecessary function calls (e.g., empty function calls or function calls that don't perform useful operations)
     const functionCallsList = (code.match(/\w+\s*\(.*\)/g) || []);
     functionCallsList.forEach(call => {
-        if (call.includes('()')) {
+        // Check for function calls with empty parentheses and no meaningful operation inside the function
+        if (call.includes('()') && !call.includes('console.log') && !call.includes('alert') && !call.includes('debugger')) {
             feedback.push(`Remove redundant function calls like '${call}' to avoid unnecessary overhead.`);
             energyUsed += 0.004; // Energy used by redundant function calls
         }
     });
+
 
     // 6. Synchronous operations in loops (performance bottlenecks)
     if (/for\s*\(.*\)\s*\{.*setTimeout/.test(code)) {
