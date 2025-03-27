@@ -15,6 +15,9 @@
     "body-parser": "^1.20.3",
     "carbon-now": "^1.0.0",
     "express": "^4.21.2",
-    "systeminformation": "^5.25.9"
+    "greenframe": "^20.0.0",
+    "os-utils": "^0.0.14",
+    "systeminformation": "^5.25.9",
+    "vm2": "^3.9.19"
   }
 }
