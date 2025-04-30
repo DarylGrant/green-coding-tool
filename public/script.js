@@ -47,8 +47,9 @@ document.getElementById("submitCode").addEventListener("click", async () => {
 
     const result = await response.json();
 
-    document.getElementById("carbonEmissions").textContent = `${result.carbonEmissions.toFixed(4)} g CO₂`;
-    document.getElementById("energyUsed").textContent = `${result.energyUsed.toFixed(4)} kWh`;
+    // Convert carbon emissions to mg CO₂ and energy used to mWh
+    document.getElementById("carbonEmissions").textContent = `${(result.carbonEmissions * 1000).toFixed(4)} mg CO₂`;
+    document.getElementById("energyUsed").textContent = `${(result.energyUsed).toFixed(4)} mWh`;
     document.getElementById("executionTime").textContent = `${executionTime} ms`;
 
     const feedbackList = document.getElementById("feedbackList");
