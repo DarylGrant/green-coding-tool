@@ -14,12 +14,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/analyse", (req, res) => {
-  const { code, executionTime } = req.body;
+  const { code, executionTime, codeSize } = req.body; // Receive codeSize
   if (!code) {
     return res.status(400).json({ error: "Code is required." });
   }
 
-  const result = analyseCode(code, executionTime);
+  const result = analyseCode(code, executionTime, codeSize); // Pass codeSize
   res.json(result);
 });
 
