@@ -1,25 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Coding Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Coding Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #009639;
+      font-family: Arial, sans-serif;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  
+    textarea {
+      background-color: #1b1b1b !important;
+      color: #009639 !important;
+      border: 1px solid #009639 !important;
+      resize: vertical;
+      box-shadow: none !important;
+      height: 200px !important;
+      padding: 10px !important;
+    }
+  
+    textarea:focus {
+      outline: none !important;
+      border-color: #009639 !important;
+      background-color: #222222 !important;
+      box-shadow: 0 0 5px #009639 !important;
+    }
+  
+    .btn-custom {
+      background-color: #009639;
+      color: #0d0d0d;
+      border: none;
+    }
+  
+    .btn-custom:hover {
+      background-color: #007f2e;
+    }
+  
+    .results-box {
+      background-color: #1a1a1a;
+      border: 1px solid #009639;
+      padding: 16px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  
+    img.logo {
+      max-height: 100px;
+      margin-bottom: 10px;
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #009639;
+    }
+  
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 15px;
+      color: #009639;
+    }
+  
+    ul#feedbackList {
+      max-height: 140px;
+      overflow-y: auto;
+      padding-left: 20px;
+      text-align: left;
+      margin-bottom: 0;
+      color: #009639;
+    }
+  
+    .container {
+      max-width: 750px;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container text-center">
+    <img src="image/LBG.png" alt="Lloyds Banking Group" class="logo" />
     <h1>Green Coding Tool</h1>
     <p>Enter your JavaScript code below:</p>
-    <textarea id="codeInput" rows="10" cols="50" placeholder="Enter JavaScript code here..."></textarea>
-    <br>
-    <button id="submitCode">Submit</button>
 
-    <h2>Results</h2>
-    <div id="results">
-        <p><strong>Average Energy Used:</strong> <span id="energyUsed">N/A</span></p>
-        <p><strong>Average Carbon Emissions:</strong> <span id="carbonEmissions">N/A</span></p>
-        <p><strong>Execution Time:</strong> <span id="executionTime">N/A</span></p>
-        <p><strong>Feedback:</strong></p>
-        <ul id="feedbackList"></ul>
+    <div class="mb-2">
+      <textarea id="codeInput" class="form-control mx-auto" style="max-width: 700px;" placeholder="Enter JavaScript code here..."></textarea>
     </div>
 
-    <script src="script.js"></script>
+    <button id="submitCode" class="btn btn-custom mb-3">Submit</button>
+
+    <h2>Results</h2>
+    <div id="results" class="results-box mx-auto" style="max-width: 700px;">
+      <p><strong>Average Energy Used:</strong> <span id="energyUsed">N/A</span></p>
+      <p><strong>Average Carbon Emissions:</strong> <span id="carbonEmissions">N/A</span></p>
+      <p><strong>Execution Time:</strong> <span id="executionTime">N/A</span></p>
+      <p><strong>Feedback:</strong></p>
+      <ul id="feedbackList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
+
+</html>

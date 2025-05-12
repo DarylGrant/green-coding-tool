@@ -1,23 +1,35 @@
 const axios = require("axios");
+const { performance } = require("perf_hooks");
 
-// Replace this with any JavaScript code you'd like to test
-const testCode =
-  `function countCharactersClean(str) {
-    const result = {};
-    for (const char of str) {
-        result[char] = (result[char] || 0) + 1;
-    }
-    return result;
+// JavaScript code to be tested
+const testCode = `
+function countCharactersClean(str) {
+  const result = {};
+  for (const char of str) {
+      result[char] = (result[char] || 0) + 1;
+  }
+  return result;
 }
 
-  
 
 
-  
+
 `;
 
 const ANALYSIS_URL = "http://localhost:3000/analyse";
 const RUN_COUNT = 100;
+
+// Function to measure execution time of the code
+function measureExecutionTime(codeStr) {
+  const start = performance.now();
+  try {
+    eval(codeStr);
+  } catch (err) {
+    console.error("Error executing test code:", err);
+  }
+  const end = performance.now();
+  return end - start;
+}
 
 async function runAnalysisMultipleTimes() {
   let totalEnergy = 0;
@@ -25,17 +37,13 @@ async function runAnalysisMultipleTimes() {
   let totalExecutionTime = 0;
 
   for (let i = 0; i < RUN_COUNT; i++) {
-    const startTime = performance.now();
+    const executionTime = measureExecutionTime(testCode);
 
     try {
       const response = await axios.post(ANALYSIS_URL, {
         code: testCode,
-        codeSize: new Blob([testCode]).size, // Send codeSize here
-        executionTime: performance.now() - startTime,
+        executionTime,
       });
-
-      const endTime = performance.now();
-      const executionTime = endTime - startTime;
 
       const { energyUsed, carbonEmissions } = response.data;
 

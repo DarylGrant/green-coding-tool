@@ -40,7 +40,6 @@ document.getElementById("submitCode").addEventListener("click", async () => {
       },
       body: JSON.stringify({
         code,
-        codeSize: new Blob([code]).size,
         executionTime: parseFloat(executionTime)
       }),
     });

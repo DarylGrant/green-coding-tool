@@ -1,12 +1,8 @@
-function analyseCode(code, executionTime = 0, codeSize = 0) {
+function analyseCode(code, executionTime = 0) {
   // Estimate base CPU energy usage (still important)
   const cpuPowerWatts = 0.5;
   const executionTimeSeconds = executionTime / 1000;
   let energyUsedKWh = (cpuPowerWatts * executionTimeSeconds) / 3600;
-
-  // Introduce a factor based on code size - larger code *might* do more work
-  const codeSizeFactor = codeSize / 10000; // Scale factor (adjust as needed)
-  energyUsedKWh += codeSizeFactor * 0.000005; // Add a small energy contribution based on size
 
   const carbonIntensity = 207.05; // g CO₂ per kWh
   const feedback = [];
