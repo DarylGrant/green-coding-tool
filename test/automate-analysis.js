@@ -3,12 +3,9 @@ const { performance } = require("perf_hooks");
 
 // JavaScript code to be tested
 const testCode = `
-function countCharactersClean(str) {
-  const result = {};
-  for (const char of str) {
-      result[char] = (result[char] || 0) + 1;
-  }
-  return result;
+function storeUserData(name) {
+  const userName = name;
+  return "User data stored locally.";
 }
 
 
