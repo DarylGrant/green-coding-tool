@@ -26,7 +26,7 @@ document.getElementById("submitCode").addEventListener("click", async () => {
     outputDiv.appendChild(script);
 
     const endTime = performance.now();
-    executionTime = (endTime - startTime).toFixed(4);
+    executionTime = (endTime - startTime).toFixed(8); // Updated to show more decimal places
   } catch (error) {
     alert("Error executing code: " + error.message);
     return;
@@ -46,10 +46,10 @@ document.getElementById("submitCode").addEventListener("click", async () => {
 
     const result = await response.json();
 
-    // Convert carbon emissions to mg CO₂ and energy used to mWh
-    document.getElementById("carbonEmissions").textContent = `${(result.carbonEmissions).toFixed(4)} mg CO₂`;
-    document.getElementById("energyUsed").textContent = `${(result.energyUsed).toFixed(4)} mWh`;
-    document.getElementById("executionTime").textContent = `${executionTime} ms`;
+    // Convert carbon emissions to mg CO₂ and energy used to mWh, with higher precision
+    document.getElementById("carbonEmissions").textContent = `${result.carbonEmissions.toFixed(6)} mg CO₂`;
+    document.getElementById("energyUsed").textContent = `${result.energyUsed.toFixed(6)} mWh`;
+    document.getElementById("executionTime").textContent = `${parseFloat(executionTime).toFixed(4)} ms`;
 
     const feedbackList = document.getElementById("feedbackList");
     result.feedback.forEach((item) => {

@@ -3,10 +3,30 @@ const { performance } = require("perf_hooks");
 
 // JavaScript code to be tested
 const testCode = `
-function storeUserData(name) {
-  const userName = name;
-  return "User data stored locally.";
+function verySlowOperation() {
+  console.time("Very Slow Operation");
+  let result = 0;
+  const iterations = 100; // Reduced iterations for demonstration
+  const innerIterations = 100; // Matches efficient_app.js
+
+  for (let i = 1; i <= iterations; i++) {
+    for (let j = 1; j <= innerIterations; j++) {
+      let factorialResult = 1;
+      for (let k = 1; k <= i; k++) { // Factorial up to i
+        factorialResult *= k;
+      }
+      result += factorialResult; // Accumulate factorial
+    }
+  }
+
+  console.log("Result:", result);
+  console.timeEnd("Very Slow Operation");
+  return "Very slow operation completed.";
 }
+
+verySlowOperation();
+
+
 
 
 

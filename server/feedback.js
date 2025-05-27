@@ -1,8 +1,9 @@
 function analyseCode(code, executionTime = 0) {
   // Estimate base CPU energy usage
-  const cpuPowerWatts = 0.5;
-  const executionTimeSeconds = executionTime / 1000;
-  let energyUsedKWh = (cpuPowerWatts * executionTimeSeconds) / 3600;
+  const cpuPowerWatts = 50; // in watts
+  const cpuPowerKilowatts = cpuPowerWatts / 1000; // convert to kW
+  const executionTimeHours = executionTime / (1000 * 3600); // convert ms to hours
+  const energyUsedKWh = cpuPowerKilowatts * executionTimeHours;
 
   const carbonIntensity = 207.05; // g CO₂ per kWh
   const feedback = [];
@@ -60,13 +61,13 @@ function analyseCode(code, executionTime = 0) {
     feedback.push("Great job! Your code appears efficient and low in emissions.");
   }
 
-  const executionCarbonEmissionsGrams = energyUsedKWh * carbonIntensity;
-  const executionCarbonEmissionsMg = executionCarbonEmissionsGrams * 1000;
-  const energyUsedmWh = energyUsedKWh * 1e6;
+  const carbonEmissionsGrams = energyUsedKWh * carbonIntensity;
+  const energyUsedmWh = energyUsedKWh * 1_000_000; // milliwatt-hours
+  const carbonEmissionsMg = carbonEmissionsGrams * 1_000; // milligrams CO₂
 
   return {
     energyUsed: energyUsedmWh,
-    carbonEmissions: executionCarbonEmissionsMg,
+    carbonEmissions: carbonEmissionsMg,
     feedback,
   };
 }
