@@ -1,3 +1,4 @@
+// Handle click event and validate input
 document.getElementById("submitCode").addEventListener("click", async () => {
   const code = document.getElementById("codeInput").value;
   if (!code.trim()) {
@@ -5,7 +6,7 @@ document.getElementById("submitCode").addEventListener("click", async () => {
     return;
   }
 
-  // Clear old output
+  // Reset UI and clear previous outputs
   console.clear();
   document.getElementById("carbonEmissions").textContent = "Calculating...";
   document.getElementById("energyUsed").textContent = "Calculating...";
@@ -14,6 +15,8 @@ document.getElementById("submitCode").addEventListener("click", async () => {
   document.querySelectorAll("#dynamicOutput").forEach(el => el.remove());
 
   let executionTime = 0;
+
+  // Execute user code and measure time
   try {
     const startTime = performance.now();
 
@@ -26,12 +29,13 @@ document.getElementById("submitCode").addEventListener("click", async () => {
     outputDiv.appendChild(script);
 
     const endTime = performance.now();
-    executionTime = (endTime - startTime).toFixed(8); // Updated to show more decimal places
+    executionTime = (endTime - startTime).toFixed(8);
   } catch (error) {
     alert("Error executing code: " + error.message);
     return;
   }
 
+  // Send code and time to backend, then handle response
   try {
     const response = await fetch("/analyse", {
       method: "POST",
@@ -46,7 +50,6 @@ document.getElementById("submitCode").addEventListener("click", async () => {
 
     const result = await response.json();
 
-    // Convert carbon emissions to mg CO₂ and energy used to mWh, with higher precision
     document.getElementById("carbonEmissions").textContent = `${result.carbonEmissions.toFixed(6)} mg CO₂`;
     document.getElementById("energyUsed").textContent = `${result.energyUsed.toFixed(6)} mWh`;
     document.getElementById("executionTime").textContent = `${parseFloat(executionTime).toFixed(4)} ms`;
