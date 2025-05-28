@@ -50,9 +50,9 @@ document.getElementById("submitCode").addEventListener("click", async () => {
 
     const result = await response.json();
 
-    document.getElementById("carbonEmissions").textContent = `${result.carbonEmissions.toFixed(6)} mg CO₂`;
-    document.getElementById("energyUsed").textContent = `${result.energyUsed.toFixed(6)} mWh`;
-    document.getElementById("executionTime").textContent = `${parseFloat(executionTime).toFixed(4)} ms`;
+    document.getElementById("carbonEmissions").textContent = `${result.carbonEmissions.toFixed(4)} mg CO₂`;
+    document.getElementById("energyUsed").textContent = `${result.energyUsed.toFixed(4)} mWh`;
+    document.getElementById("executionTime").textContent = `${parseFloat(executionTime).toFixed(2)} ms`;
 
     const feedbackList = document.getElementById("feedbackList");
     result.feedback.forEach((item) => {

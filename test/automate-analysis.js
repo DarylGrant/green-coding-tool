@@ -81,7 +81,7 @@ async function runAnalysisMultipleTimes() {
   console.log("=== AVERAGE RESULTS AFTER 100 RUNS ===");
   console.log(`Average Energy Used: ${avgEnergy.toFixed(4)} mWh`);
   console.log(`Average Carbon Emissions: ${avgCarbon.toFixed(4)} mg CO₂`);
-  console.log(`Average Execution Time: ${avgExecutionTime.toFixed(4)} ms`);
+  console.log(`Average Execution Time: ${avgExecutionTime.toFixed(2)} ms`);
 }
 
 runAnalysisMultipleTimes();
