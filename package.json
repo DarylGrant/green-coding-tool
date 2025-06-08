@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,8 @@
     "os-utils": "^0.0.14",
     "systeminformation": "^5.25.9",
     "vm2": "^3.9.19"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
