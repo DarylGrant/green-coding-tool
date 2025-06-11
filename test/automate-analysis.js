@@ -3,83 +3,20 @@ const { performance } = require("perf_hooks");
 
 // JavaScript code to be tested
 const testCode = `
-function computeFibonacci(n) {
-  const memo = [0, 1];
-  for (let i = 2; i <= n; i++) {
-    memo[i] = memo[i - 1] + memo[i - 2];
-  }
-  return memo[n];
-}
+let goodCode = '<button id="myButton">Click</button>' +
+               '<script>' +
+               'function doSomething() { alert("Hello"); }' +
+               'document.getElementById("myButton").addEventListener("click", doSomething);' +
+               '</script>';
 
-function generateLargeArray(size) {
-  return Array.from({ length: size }, () => Math.random() * 100000);
-}
-
-function sortAndProcessArray(arr) {
-  const sorted = Float64Array.from(arr).sort((a, b) => a - b);
-  const processed = [];
-  for (let i = 0; i < sorted.length; i++) {
-    processed.push(Math.log1p(sorted[i]) * Math.sin(i));
-  }
-  return processed;
-}
-
-function generatePrimes(limit) {
-  const sieve = new Array(limit).fill(true);
-  sieve[0] = sieve[1] = false;
-  for (let i = 2; i * i < limit; i++) {
-    if (sieve[i]) {
-      for (let j = i * i; j < limit; j += i) {
-        sieve[j] = false;
-      }
-    }
-  }
-  return sieve.reduce((primes, isPrime, i) => {
-    if (isPrime) primes.push(i);
-    return primes;
-  }, []);
-}
-
-function deepObjectOperation(depth, width) {
-  const buildObject = () => {
-    let obj = { value: Math.random() };
-    for (let d = 0; d < depth; d++) {
-      const newObj = {};
-      for (let i = 0; i < width; i++) {
-        newObj["key_" + i] = obj;
-      }
-      obj = newObj;
-    }
-    return obj;
-  };
-  return JSON.stringify(buildObject());
-}
-
-function cpuIntensiveTask() {
-  console.time("CPU Intensive Task");
-
-  const fib = computeFibonacci(25);
-  const primes = generatePrimes(10000);
-  const largeArray = generateLargeArray(50000);
-  const processedArray = sortAndProcessArray(largeArray);
-  const deepObject = deepObjectOperation(5, 4);
-
-  console.log("Fibonacci Result:", fib);
-  console.log("Number of Primes Found:", primes.length);
-  console.log("Processed Array Sample:", processedArray.slice(0, 5));
-  console.log("Deep Object Size (chars):", deepObject.length);
-
-  console.timeEnd("CPU Intensive Task");
-  return "Heavy computation completed.";
-}
-
-cpuIntensiveTask();
 
 
 
 
 
 `;
+
+
 
 const ANALYSIS_URL = "http://localhost:3000/analyse";
 const RUN_COUNT = 100;
