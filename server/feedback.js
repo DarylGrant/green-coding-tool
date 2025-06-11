@@ -15,10 +15,11 @@ function analyseCode(code, executionTime = 0) {
   }
 
   // 2. Check for global variables
-  const globalVars = (code.match(/window\.\w+\s*=/g) || []).length;
-  if (globalVars > 0) {
-    feedback.push("Avoid using global variables, as they can lead to memory leaks and increased memory consumption.");
-  }
+const globalVars = (code.match(/(?:window|global)\.\w+\s*=/g) || []).length;
+if (globalVars > 0) {
+  feedback.push("Avoid using global variables, as they can lead to memory leaks and increased memory consumption.");
+}
+
 
   // 3. Large loops check
   const loopMatches = code.match(/for\s*\(.*;.*<\s*(\d+);.*\)\s*\{/g) || [];
@@ -37,7 +38,8 @@ function analyseCode(code, executionTime = 0) {
   }
 
   // 5. Synchronous ops in loops
-  if (/for\s*\(.*\)\s*\{[^{}]*setTimeout\s*\(/.test(code)) {
+  if (/for\s*\(.*\)\s*\{[^]*?setTimeout\s*\(/
+  .test(code)) {
     feedback.push("Avoid using synchronous operations like 'setTimeout' inside loops, as they can block execution and consume more energy.");
   }
 
@@ -47,7 +49,7 @@ function analyseCode(code, executionTime = 0) {
   }
 
   // 7. Inline event handlers
-  if (/<\w+\s+[a-zA-Z]+\s*=\s*['"][a-zA-Z]+\(['"]/.test(code)) {
+  if (/<\w+[^>]*\s+on\w+\s*=\s*["'][^"']*["']/i.test(code)) {
     feedback.push("Avoid inline event handlers to reduce inefficient DOM manipulation.");
   }
 
